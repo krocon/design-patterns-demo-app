@@ -23,3 +23,11 @@ export class LoggingPriceService implements PriceService {
     return this.inner.getPrice(sku);
   }
 }
+
+// Zusammenbauen: Hülle um Hülle – gleiches Interface.
+export function createPriceService(prices: Record<string, number>, log: string[]): PriceService {
+  return new LoggingPriceService(
+    new CachingPriceService(
+      new TablePriceService(prices)),
+    log);
+}

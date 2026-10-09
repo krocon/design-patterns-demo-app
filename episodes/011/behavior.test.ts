@@ -36,3 +36,12 @@ describe('011 Decorator frei kombinierbar', () => {
     expect(log).toEqual(['getPrice(X)']);
   });
 });
+
+describe('011 createPriceService', () => {
+  it('Logging außen, Cache innen', () => {
+    const log: string[] = [];
+    const svc = after.createPriceService(table, log);
+    expect(svc.getPrice('BOOK')).toBe(12.5);
+    expect(log).toEqual(['getPrice(BOOK)']);
+  });
+});
